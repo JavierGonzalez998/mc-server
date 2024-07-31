@@ -1,19 +1,16 @@
-version: "3.8"
-
+version: '3.8'
 services:
-  minecraft:
+  minecraft-server:
     image: itzg/minecraft-server
-    tty: true
-    stdin_open: true
     ports:
       - "25565:25565"
-    environment:
-      TYPE: AUTO_CURSEFORGE
-      CF_API_KEY: $$2a$$10$$G4VePGSj1bTQc0.2KnYxHe5EpSDUCHEKicCKJhR7YSZdhGYo52MxO
-      CF_PAGE_URL: https://www.curseforge.com/minecraft/modpacks/industrial-village/files/5545120
-      EULA: "TRUE"
-      MEMORY: 8G
-      VERSION: "1.20.1"
     volumes:
-      - ./mcdata:/data
-    restart: on-failure:3
+      - ./data:/data
+      - ./mods:/mods
+    environment:
+      EULA: "TRUE"
+      VERSION: "1.20.1"
+      MEMORY: "2G"
+      MODS: "/mods"
+      TYPE: "FORGE"
+      FORGEVERSION: "latest"
